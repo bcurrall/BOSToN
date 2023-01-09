@@ -1,0 +1,288 @@
+/* Currall Research CSS - www.currallresearch.net */
+
+/* Reset */
+
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+	}
+body {
+	line-height: 1;
+	}
+ol, ul {
+	list-style: none;
+	}
+	
+blockquote, q {
+	quotes: none;
+	}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+	}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+/* End Reset */
+
+/* Global */
+html {width:1020px; height:100%; position:relative; margin:auto;}
+body {background-color:#FFF}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {font-weight:bold;font-family:Arial, Helvetica, sans-serif;}
+
+h1 { font-size:24px; color:#000; padding-bottom:10px; border-bottom: 1px #ccc solid;}
+h2 { font-size:20px;}
+h3 { font-size:16px;}
+h4 {font-size:14px;}
+h5 {}
+h6 {}
+
+/* Text Elemsnts */
+
+p {font-family:Arial, Helvetica, sans-serif; font-size:14px;color:#000; margin:15px 0}
+
+a 			{}
+a:link		{color:#00f;}
+a:visted 	{color:00f;}
+a:active	{color:#000;}
+a:focus		{color:#666;}
+a:hover 	{color:f00;}
+
+/* Containers */
+
+#outer {
+	width:1020px; 
+	margin:0 auto;
+	background-color:#FFF;
+	}
+	
+#wrapper {width:1000px; margin:0 auto; background-color:#FFF}
+
+#logo {float:left; margin:30px 0;}
+	
+
+
+
+#topnav 			{float:left;}
+#topnav ul 			{margin-top: 20px; padding:0; list-style-type:none}
+#topnav ul li 		{list-style:none;float:left; position:relative; padding: 0px 10px 0px 10px; margin: 0px 0px 0px 0px;}
+#topnav ul li a 	{text-align:center; height: 20px;display:block;}
+#topnav ul ul		{position:relative; display:inline; visibility:hidden; background-color:#FFF; width:100px;}
+
+#topnav ul li:hover ul	{visibility:visible}
+
+#banner {width: 1000px; height:360px; background-color:#000}
+#banner img {position:absolute; margin:15px 15px}
+
+#topnav a 			{text-decoration:none}
+#topnav a:link		{color:#000; font-weight:bold;}
+#topnav a:visted 	{color:#000; font-weight:bold;}
+#topnav a:active	{color:#000;}
+#topnav a:focus		{color:#666;}
+#topnav a:hover 	{color:#F90}
+
+
+#content {margin-top:20px; width:1000px}
+
+#rightnav{width:200px; float:right}
+
+#streaming{clear:both}
+
+
+
+#footer {clear:both; margin:20px 0; font-size:10px;border-top:1px #ccc solid; padding-bottom:5px}
+
+#socialmedia		{float:right;}
+#socialmedia ul 	{margin-top:20px;}
+#socialmedia ul li 	{display:inline;}
+
+#box1 {width:250px; float:left; margin:30px; border-top: 10px #F00 solid; background-color:#CCC; padding:10px}
+
+#box2 {width:250px; float:left; margin:30px; border-top: 10px #00F solid; background-color:#CCC; padding:10px}
+
+#box3 {width:250px; float:left; margin:30px; border-top: 10px #0F0 solid; background-color:#CCC; padding:10px}
+
+#box1 h3,#box2 h3,#box3 h3 {margin:20px 10px 10px 10px}
+
+/* Slider */
+div.wrap {
+width : 993px;
+margin : 0 auto;
+text-align : left;
+}
+div#top div#nav {
+float : left;
+clear : both;
+width : 993px;
+height : 52px;
+margin : 22px 0 0;
+}
+div#top div#nav ul {
+float : left;
+width : 700px;
+height : 52px;
+list-style-type : none;
+}
+div#nav ul li {
+float : left;
+height : 52px;
+}
+div#nav ul li a {
+border : 0;
+height : 52px;
+display : block;
+line-height : 52px;
+text-indent : -9999px;
+}
+div#header {
+clear:both;
+margin : 10px 0 0;
+background-color:#000
+}
+div#video-header {
+height : 683px;
+margin : -1px 0 0;
+}
+div#header div.wrap {
+height : 299px;
+background : url(images/header-bg.png) no-repeat 50% 0;
+}
+div#header div#slide-holder {
+z-index : 40;
+width : 993px;
+height : 299px;
+position : absolute;
+}
+div#header div#slide-holder div#slide-runner {
+top : 9px;
+left : 9px;
+width : 973px;
+height : 278px;
+overflow : hidden;
+position : absolute;
+}
+div#header div#slide-holder img {
+margin : 0;
+display : none;
+position : absolute;
+}
+div#header div#slide-holder div#slide-controls {
+left : 0;
+bottom : 228px;
+width : 973px;
+height : 46px;
+display : none;
+position : absolute;
+background : url(images/slide-bg.png) 0 0;
+}
+div#header div#slide-holder div#slide-controls p.text {
+float : left;
+color:#0F0;
+display : inline;
+font-size : 10px;
+font-weight:bold;
+line-height : 16px;
+margin : 15px 0 0 20px;
+text-transform : uppercase;
+}
+div#header div#slide-holder div#slide-controls p#slide-nav {
+float : right;
+height : 24px;
+display : inline;
+margin : 11px 15px 0 0;
+}
+div#header div#slide-holder div#slide-controls p#slide-nav a {
+float : left;
+width : 24px;
+height : 24px;
+display : inline;
+font-size : 11px;
+margin : 0 5px 0 0;
+line-height : 24px;
+font-weight : bold;
+text-align : center;
+text-decoration : none;
+background-position : 0 0;
+background-repeat : no-repeat;
+}
+div#header div#slide-holder div#slide-controls p#slide-nav a.on {
+background-position : 0 -24px;
+}
+div#header div#slide-holder div#slide-controls p#slide-nav a {
+background-image : url(images/silde-nav.png);
+}
+div#nav ul li a {
+background : url(images/nav.png) no-repeat;
+}
+
+/* Paragraph Styles */
+.post-container {
+    clear:both;
+	margin: 20px 0;
+}
+
+.post-thumb img {
+    display: block;
+	margin:auto;
+}
+.post-title {
+    font-weight: bold;
+}
+.post-thumbl {
+    float: left
+}
+.post-contentl {
+    margin-left: 210px
+}
+
+.post-thumbr {
+    float: right
+}
+
+.post-contentr {
+    margin-right: 210px
+}
+
+
+/* Images */
+
+.image-frame { padding:10ox; border:1px #ccc solid; margin:10px;}
+
+/* Misc */
+
+.date {font-weigth:bold; color:#333}
+
+.footer-text { font-size:80%; font-style:normal; color:#000; text-align:center}
+
+
+/* Alerts */
+/* End Alerts */
