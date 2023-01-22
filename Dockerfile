@@ -9,6 +9,9 @@ RUN yum -y install httpd httpd-tools
 # Install Python 3
 RUN yum -y install python3
 
+# Install mod_wsgi
+RUN yum -y install mod_wsgi
+
 # Update Apache Configuration
 RUN sed -E -i -e '/<Directory "\/var\/www\/html">/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
 
