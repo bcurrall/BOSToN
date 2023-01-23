@@ -12,6 +12,8 @@ RUN yum -y install python3
 # Install mod_wsgi
 RUN yum -y install mod_wsgi
 
+RUN pip3 install biopython
+
 COPY www /var/www
 
 EXPOSE 80
