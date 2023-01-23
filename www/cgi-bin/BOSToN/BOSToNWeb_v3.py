@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7.3
+#!/usr/local/bin/python3.1.1
 
 
 from Bio.Blast.Applications import NcbiblastnCommandline
@@ -67,7 +67,7 @@ def NumAlphaConvert(n): # converts numeral to alpha
     elif n == 14:
         out = 'O'
     elif n == 15:
-        out = 'P'   
+        out = 'P'
     else:
         out = 'error: too many rearrangements'
     return out
@@ -221,8 +221,8 @@ def ParseBlastXml(fasta_file): #parses xml data into individual records
 """ End BLAST I/O and BioPython Parsing"""
 
 """Retrieve Necessary Data and Direction for Analysis from BioPython Parsed Records"""
-def BlastOutput(blast_records): #retrieve necessary data from BioPython defined records   
-    blast_output_error = []    
+def BlastOutput(blast_records): #retrieve necessary data from BioPython defined records
+    blast_output_error = []
     blast_output= []
     QxyD = []
     quality_data=[]
@@ -237,7 +237,7 @@ def BlastOutput(blast_records): #retrieve necessary data from BioPython defined 
         SyC = SyBP = SyBPO = SyS = SyE = SyD = QyD = QyS = QyE = QxBP = QxBPO = yExpect = yScore = yIdentity = ySeq = []
         endfilter = EndFilter()
         IQLength = iteration.query_length
-        QScore = 1                    # QScore is score filter (bits) for BLAST Sequence - reset to zero for each alignment 
+        QScore = 1                    # QScore is score filter (bits) for BLAST Sequence - reset to zero for each alignment
         for alignment in iteration.alignments:    # find best left(x) BLAST result per submission
             for hsp in alignment.hsps:
                 if assemblyfilter in alignment.title:    # filters BLAST results to Primary Assembly
@@ -275,7 +275,7 @@ def BlastOutput(blast_records): #retrieve necessary data from BioPython defined 
         QScore = 1   # QScore is score filter (bits) for BLAST Sequence - reset to zero for each alignment
         for alignment in iteration.alignments:    # find best right(y) BLAST result per submission
             for hsp in alignment.hsps:
-                if assemblyfilter in alignment.title:    # filters BLAST results to Primary Assembly  
+                if assemblyfilter in alignment.title:    # filters BLAST results to Primary Assembly
                     if hsp.query_end > (IQLength - endfilter):  # filters for right(y) BLAST results to only those that have a good reads to end of query
                         QScoreTemp = hsp.expect           # set QScore to current record
                         if hsp.identities/float(hsp.align_length) > identity and QScore > QScoreTemp:            # check to see if current record the biggest QScore
@@ -308,11 +308,11 @@ def BlastOutput(blast_records): #retrieve necessary data from BioPython defined 
                             yScore = hsp.bits
                             ySeq = str(hsp.query)
         if SxC == [] and SyC == []:    #Error Handling for poor alignments
-            blast_output_error.append(" BLAST Ouput Error BE003 - Fasta Input:\" %s\" - neither end aligned well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query)   
+            blast_output_error.append(" BLAST Ouput Error BE003 - Fasta Input:\" %s\" - neither end aligned well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query)
         elif SxC == [] and SyC != []:
-            blast_output_error.append(" BLAST Ouput Error BE004 - Fasta Input:\" %s\" - left end did not align well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query) 
+            blast_output_error.append(" BLAST Ouput Error BE004 - Fasta Input:\" %s\" - left end did not align well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query)
         elif SxC != [] and SyC == []:
-            blast_output_error.append(" BLAST Ouput Error BE005 - Fasta Input:\" %s\" right end did not align well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query) 
+            blast_output_error.append(" BLAST Ouput Error BE005 - Fasta Input:\" %s\" right end did not align well to reference. Change filter parameter, remove poor alignment from ends (e.g., \"N \") and/or insert more flanking nucleotides." % iteration.query)
         elif SxS == SxBP and abs(SxE-SyBP) < overlapcheck: #Error Handling of non-breakpoint sequences
             blast_output_error.append(" BLAST Ouput Error BE001 - Fasta Input:\" %s\" - did not find breakpoint. Insert more flanking nucleotides." % iteration.query)
         elif SxE == SxBP and abs(SxS-SyBP) < overlapcheck:
@@ -382,7 +382,7 @@ def D_Picker(M1Raw): #pick derivative chromosome
     DnC.sort()
     for elem in DnC:
         elem = ConvertStr(elem)
-        TempDnC.append(elem)   
+        TempDnC.append(elem)
     DnC = TempDnC
     return DnC
 
@@ -412,7 +412,7 @@ def O_Picker(M1Raw,InputSeqs):
             if M1Raw[i*2 + 1][8] == 1:
                 DnO[i].extend([M1Raw[i*2 + 1][9]])
             if M1Raw[i*2 + 1][8] == -1:
-                DnO[i].extend([M1Raw[i*2 + 1][10]]) 
+                DnO[i].extend([M1Raw[i*2 + 1][10]])
             temp = list(InputSeqs[i+1])
             m = ''.join(temp[DnO[i][2]:DnO[i][3] - 1])
             DnO[i].extend([m])
@@ -430,7 +430,7 @@ def O_Picker(M1Raw,InputSeqs):
                 DnO[i].extend([M1Raw[i*2 + 1][2], M1Raw[i*2 + 1][2] - DnO[i][0]])
             if list(str(DnO[i][2])) == list(str(DnO[i][3])):         # what to write in for MH x portion
                 temp = list(str(DnO[i][2]))
-                temp[len(list(str(DnO[i][2]))) - 1] = ''.join(['{',temp[len(list(str(DnO[i][2]))) - 1],'}'])    
+                temp[len(list(str(DnO[i][2]))) - 1] = ''.join(['{',temp[len(list(str(DnO[i][2]))) - 1],'}'])
                 temp = ''.join(temp)
                 DnO[i].append(temp)
             else:
@@ -457,7 +457,7 @@ def O_Picker(M1Raw,InputSeqs):
                 DnO[i].append(final)
             if list(str(DnO[i][4])) == list(str(DnO[i][5])):         # what to write in for MH y portion
                 temp = list(str(DnO[i][4]))
-                temp[len(list(str(DnO[i][4]))) - 1] = ''.join(['{',temp[len(list(str(DnO[i][4]))) - 1],'}'])    
+                temp[len(list(str(DnO[i][4]))) - 1] = ''.join(['{',temp[len(list(str(DnO[i][4]))) - 1],'}'])
                 temp = ''.join(temp)
                 DnO[i].append(temp)
             else:
@@ -521,7 +521,7 @@ def Rearrangement_Pieces(M1Raw, DnO):
         else:
             temp7 = ''.join(['(', str(M1Raw[i*2 + 1][2]), ')'])
         RP.extend([''.join([temp1,temp2,temp3,temp4,temp5,temp6,temp7])])
-    return RP 
+    return RP
 """End Building Break Points"""
 
 """Full Nomenclature"""
@@ -560,7 +560,7 @@ def Derivative_Definition(M1Raw, M1Final, DnC):
                     DnR0pA = M1Raw[i-1][7]
                     DnR0pB = M1Raw[i-1][2]
                     DnR0pBO = M1Raw[i-1][3]
-                    DnR0pFASTA = M1Final[i][19]  
+                    DnR0pFASTA = M1Final[i][19]
                 elif re.search('y',NC[NCmini-1]) != None and M1Raw[i][0] == NC[NCmini-1] and M1Raw[i][6] == -1:
                     nomenclature_error.append("Nomenclature Error NE001 - Right side of FASTA Input:\" %0s\" - Sequence is inverted and cannot be closest to the centromere. Please check for other breakpoints on the %1s side of chromosome %2s." % (M1Final[i][17], "pter", DC))
                 elif re.search('x',NC[NCmini-1]) != None and M1Raw[i][0] == NC[NCmini-1] and M1Raw[i][6] == -1:  # find left (x) BLAST with NC value, with the same name (e.g., IOx) and (-) direction - this is the normal part of the chromosome
@@ -569,13 +569,13 @@ def Derivative_Definition(M1Raw, M1Final, DnC):
                     if M1Final[i][18] == '':
                         BPU = '::'
                     else:
-                        BPU =''.join( ['::',M1Final[i][18],"::"]) 
+                        BPU =''.join( ['::',M1Final[i][18],"::"])
                     DnR0pN = ''.join(["->",str(DnR0pC),str(M1Raw[i+1][13]),"(",str(M1Final[i+1][2]),")",BPU,str(NR0pC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")->"])    # add y pside BP information
                     DnR0pD = M1Raw[i+1][6]
                     DnR0pA = M1Raw[i+1][7]
                     DnR0pB = M1Raw[i+1][2]
                     DnR0pBO = M1Raw[i+1][3]
-                    DnR0pFASTA = M1Final[i][19]  
+                    DnR0pFASTA = M1Final[i][19]
                 elif re.search('x',NC[NCmini-1]) != None and M1Raw[i][0] == NC[NCmini-1] and M1Raw[i][6] == 1:
                     nomenclature_error.append("Nomenclature Error NE002 - Left side of FASTA Input:\" %0s\" - Sequence is inverted and cannot be closest to the centromere. Please check for other breakpoints on the %1s side of chromosome %2s." % (M1Final[i][17], "pter", DC))
         if DnR0pN != []:
@@ -590,11 +590,11 @@ def Derivative_Definition(M1Raw, M1Final, DnC):
                 elif whilecounter <= (len(M1Raw)/2):
                     Rp, Pname, DnRnpFASTA = P_Extender(M1Raw, M1Final, Rp)
                     if DnRnpFASTA != []:
-                        UsageCheck.append(DnRnpFASTA) 
+                        UsageCheck.append(DnRnpFASTA)
             D.append(Rp)
         elif DnR0pN == []:
             Rp = None
-                
+
         ########################################### Q PART
         NC = []
         if Rp != None:
@@ -617,13 +617,13 @@ def Derivative_Definition(M1Raw, M1Final, DnC):
                     if M1Final[i][18] == '':
                         BPU = '::'
                     else:
-                        BPU =''.join( ['::',M1Final[i][18],"::"])                  
+                        BPU =''.join( ['::',M1Final[i][18],"::"])
                     DnR0qN = ''.join([arrow,str(NR0qC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")",BPU,str(DnR0qC),str(M1Raw[i-1][13]),"(",str(M1Final[i-1][2]),")->"])         # add x qside BP information
                     DnR0qD = M1Raw[i-1][6]
                     DnR0qA = M1Raw[i-1][7]
                     DnR0qB = M1Raw[i-1][2]
                     DnR0qBO = M1Raw[i-1][3]
-                    DnR0qFASTA = M1Final[i][19]  
+                    DnR0qFASTA = M1Final[i][19]
                 elif re.search('y',NC[NCmini-1]) != None and M1Raw[i][0] == NC[NCmini-1] and M1Raw[i][6] == 1:
                     nomenclature_error.append("Nomenclature Error NE003 - Right side of FASTA Input:\" %0s\" - Sequence is inverted and cannot be closest to the centromere. Please check for other breakpoints on the %1s side of chromosome %2s." % (M1Final[i][17], "qter", DC))
                 elif re.search('x',NC[NCmini-1]) != None and M1Raw[i][0] == NC[NCmini-1] and M1Raw[i][6] == 1:  # find left (x) BLAST with NC value, with the same name (e.g., IOx) and (+) direction - this is the normal part of the chromosome
@@ -657,7 +657,7 @@ def Derivative_Definition(M1Raw, M1Final, DnC):
                 elif whilecounter <= (len(M1Raw)/2):
                     Rq, Qname, DnRnqFASTA  = Q_Extender(M1Raw,M1Final, Rq)
                     if DnRnqFASTA != []:
-                        UsageCheck.append(DnRnqFASTA) 
+                        UsageCheck.append(DnRnqFASTA)
             D.append(Rq)
             Rp=DnR0pB=DnR0pC=DnR0pD=DnR0pA=DnR0pN=DnR0pFASTA=DnR0pBO=[]
             Rq=DnR0qB=DnR0qC=DnR0qD=DnR0qA=DnR0qN=DnR0qFASTA=DnR0qBO=[]
@@ -679,13 +679,13 @@ def P_Extender(M1Raw, M1Final, Rp, Pname = None):
     temp=DnRnpB=DnRnpC=DnRnpD=DnRnpA=DnRnpN=DnRnpFASTA=DnRnpBO=[]
     for i in range(len(M1Raw)):
         if Rp[len(Rp)-1][1] == M1Raw[i][1]:          # len(Rp)-1 because index starts at 0
-            if Rp[len(Rp)-1][0] < Rp[len(Rp)-1][7]:   
+            if Rp[len(Rp)-1][0] < Rp[len(Rp)-1][7]:
                 if Rp[len(Rp)-1][7] <  M1Raw[i][3]:
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][4] -  Rp[len(Rp)-1][0])])
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][5] -  Rp[len(Rp)-1][0])])
                 elif Rp[len(Rp)-1][7] >=  M1Raw[i][3]:
                     pass
-            elif Rp[len(Rp)-1][0] > Rp[len(Rp)-1][7]:   
+            elif Rp[len(Rp)-1][0] > Rp[len(Rp)-1][7]:
                 if Rp[len(Rp)-1][7] >  M1Raw[i][3]:
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][4] -  Rp[len(Rp)-1][0])])
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][5] -  Rp[len(Rp)-1][0])])
@@ -704,26 +704,26 @@ def P_Extender(M1Raw, M1Final, Rp, Pname = None):
                 if M1Final[i][18] == '':
                     BPU = '::'
                 else:
-                    BPU =''.join( ['::',M1Final[i][18],"::"])                  
+                    BPU =''.join( ['::',M1Final[i][18],"::"])
                 DnRnpN = ''.join([str(NRnqC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")",BPU,str(DnRnqC),str(M1Raw[i-1][13]),"(",str(M1Final[i-1][2]),")->"])         # add x qside BP information
                 DnRnpD = M1Raw[i-1][6]
                 DnRnpA = M1Raw[i-1][7]
                 DnRnpB = M1Raw[i-1][2]
                 DnRnpBO = M1Raw[i-1][3]
-                DnRnpFASTA = M1Final[i][19]  
-            elif re.search('x',temp[tempmini-1]) != None and M1Raw[i][0] == temp[tempmini-1]:                                # case: SxC, x == -   
+                DnRnpFASTA = M1Final[i][19]
+            elif re.search('x',temp[tempmini-1]) != None and M1Raw[i][0] == temp[tempmini-1]:                                # case: SxC, x == -
                 DnRnqC = M1Raw[i+1][1]
                 NRnqC = M1Raw[i][1]
                 if M1Final[i][18] == '':
                     BPU = '::'
                 else:
-                    BPU =''.join( ['::',M1Final[i][18],"::"])                  
+                    BPU =''.join( ['::',M1Final[i][18],"::"])
                 DnRnpN = ''.join([str(NRnqC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")",BPU,str(DnRnqC),str(M1Raw[i+1][13]),"(",str(M1Final[i+1][2]),")->"])         # add x qside BP information
                 DnRnpD = M1Raw[i+1][6]
                 DnRnpA = M1Raw[i+1][7]
                 DnRnpB = M1Raw[i+1][2]
                 DnRnpBO = M1Raw[i+1][3]
-                DnRnpFASTA = M1Final[i][19]  
+                DnRnpFASTA = M1Final[i][19]
         Rp.append([DnRnpB, DnRnpC, DnRnpD, DnRnpA, DnRnpN,'pside',DnRnpFASTA,DnRnpBO])
         return Rp, Pname, DnRnpFASTA
 
@@ -731,13 +731,13 @@ def Q_Extender(M1Raw, M1Final, Rq, Qname = None):
     temp = DnRnqC = NRnqC = DnRnqN = DnRnqD = DnRnqA = DnRnqB = DnRnqFASTA = DnRnqBO = []
     for i in range(len(M1Raw)):
         if Rq[len(Rq)-1][1] == M1Raw[i][1]:          # len(Rp)-1 because index starts at 0
-            if Rq[len(Rq)-1][0] < Rq[len(Rq)-1][7]:   
+            if Rq[len(Rq)-1][0] < Rq[len(Rq)-1][7]:
                 if Rq[len(Rq)-1][7] <  M1Raw[i][3]:
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][4] -  Rq[len(Rq)-1][0])])
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][5] -  Rq[len(Rq)-1][0])])
                 elif Rq[len(Rq)-1][7] >=  M1Raw[i][3]:
                     pass
-            elif Rq[len(Rq)-1][0] > Rq[len(Rq)-1][7]: 
+            elif Rq[len(Rq)-1][0] > Rq[len(Rq)-1][7]:
                 if Rq[len(Rq)-1][7] >  M1Raw[i][3]:
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][4] -  Rq[len(Rq)-1][0])])
                     temp.extend([M1Raw[i][0],abs(M1Raw[i][5] -  Rq[len(Rq)-1][0])])
@@ -756,26 +756,26 @@ def Q_Extender(M1Raw, M1Final, Rq, Qname = None):
                 if M1Final[i][18] == '':
                     BPU = '::'
                 else:
-                    BPU =''.join( ['::',M1Final[i][18],"::"])                  
+                    BPU =''.join( ['::',M1Final[i][18],"::"])
                 DnRnqN = ''.join([str(NRnqC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")",BPU,str(DnRnqC),str(M1Raw[i-1][13]),"(",str(M1Final[i-1][2]),")->"])         # add x qside BP information
                 DnRnqD = M1Raw[i-1][6]
                 DnRnqA = M1Raw[i-1][7]
                 DnRnqB = M1Raw[i-1][2]
                 DnRnqBO = M1Raw[i-1][3]
-                DnRnqFASTA = M1Final[i][19]  
-            elif re.search('x',temp[tempmini-1]) != None and M1Raw[i][0] == temp[tempmini-1]:                                    # case: SxC, x == -   
+                DnRnqFASTA = M1Final[i][19]
+            elif re.search('x',temp[tempmini-1]) != None and M1Raw[i][0] == temp[tempmini-1]:                                    # case: SxC, x == -
                 DnRnqC = M1Raw[i+1][1]
                 NRnqC = M1Raw[i][1]
                 if M1Final[i][18] == '':
                     BPU = '::'
                 else:
-                    BPU =''.join( ['::',M1Final[i][18],"::"])                  
+                    BPU =''.join( ['::',M1Final[i][18],"::"])
                 DnRnqN = ''.join([str(NRnqC),str(M1Raw[i][13]),"(",str(M1Final[i][2]),")",BPU,str(DnRnqC),str(M1Raw[i+1][13]),"(",str(M1Final[i+1][2]),")->"])         # add x qside BP information
                 DnRnqD = M1Raw[i+1][6]
                 DnRnqA = M1Raw[i+1][7]
                 DnRnqB = M1Raw[i+1][2]
                 DnRnqBO = M1Raw[i+1][3]
-                DnRnqFASTA = M1Final[i][19]  
+                DnRnqFASTA = M1Final[i][19]
         Rq.append([DnRnqB, DnRnqC, DnRnqD, DnRnqA, DnRnqN,'qside', DnRnqFASTA,DnRnqBO])
         return Rq, Qname, DnRnqFASTA
 
@@ -784,7 +784,7 @@ def Naming(D, DnC):
     Kseq.append([''.join(['seq[',assembly,'] '])])
     for DC in DnC:                  # pick corresponding D chr
         finalp = []
-        finalq = [] 
+        finalq = []
         for i in range(len(D)):     # pick corresponding D chr
             if D[i] == DC:             # pick corresponding D chr
                 for o in range(len(D[i + 1])):
@@ -793,12 +793,12 @@ def Naming(D, DnC):
                         finalp.reverse()              # MAKE SURE REVERSING WITHIN LOOP CORRECT
                     elif D[i + 1][o][5] == 'qside':
                         finalq = finalq + [D[i + 1][o][4]]
-        strp = ''.join(finalp)           
+        strp = ''.join(finalp)
         strq = ''.join(finalq)             # empty ones == ''
         if DC == -1:
-            DC = "X"        
+            DC = "X"
         if DC == 0:
-            DC = "Y"        
+            DC = "Y"
         if finalp != [] and finalq != []:
             Kseq.append([''.join(['der(',str(DC),')(',strp,strq,')'])])
         elif finalp == [] and finalq != []:
@@ -859,7 +859,7 @@ def Tables_Small(M1Raw, i):
     print("<td>%s</td>") % M1Raw[i*2][4] # sbjct start
     print("<td>%s</td>") % M1Raw[i*2][5] # sbjct end
     print("<td>%s</td>") % M1Raw[i*2][15] # blast Score
-    print("<td>%s</td>") % M1Raw[i*2][14] # blast e-value 
+    print("<td>%s</td>") % M1Raw[i*2][14] # blast e-value
     print("</tr>")
 
     ## ALL THE y stuff here
@@ -882,10 +882,10 @@ def Tables_Small(M1Raw, i):
     print("<td>%s</td>") % M1Raw[i*2+1][4] # sbjct start
     print("<td>%s</td>") % M1Raw[i*2+1][5] # sbjct end
     print("<td>%s</td>") % M1Raw[i*2+1][15] # blast Score
-    print("<td>%s</td>") % M1Raw[i*2+1][14] # blast e-value 
+    print("<td>%s</td>") % M1Raw[i*2+1][14] # blast e-value
     print("</tr>")
     print("</table>")
-    
+
 def HTML_Header():
     print("""
     <html>
@@ -901,11 +901,11 @@ def HTML_Footer():
     </p>
     </body>
     </html>
-    """)    
+    """)
 def SingleBreakPointTables(M1Raw,i):
     BPTable = []
     QStart = QEnd = QLength = QStrand = Identity = SChr = SBand = SStrand = SStart = SEnd = Score = Evalue = []
-    
+
     ## All the x stuff here
     QStart = str(M1Raw[i*2][9]) # query start
     QEnd = str(M1Raw[i*2][10]) # query end
@@ -925,8 +925,8 @@ def SingleBreakPointTables(M1Raw,i):
     SEnd = str(M1Raw[i*2][5]) # sbjct end
     Score = str(M1Raw[i*2][15]) # blast Score
     Evalue = str(M1Raw[i*2][14]) # blast e-value
-    BPTable.append([QStart, QEnd, QLength, QStrand, Identity, SChr, SBand, SStrand, SStart, SEnd, Score, Evalue]) 
-  
+    BPTable.append([QStart, QEnd, QLength, QStrand, Identity, SChr, SBand, SStrand, SStart, SEnd, Score, Evalue])
+
     ## ALL THE y stuff here
     QStart = str(M1Raw[i*2+1][9]) # query start
     QEnd = str(M1Raw[i*2+1][10]) # query end
@@ -958,7 +958,7 @@ def BPExecute(fasta_file):
     blast_arm = GetArm(blast_output)
     BANDxy = GetBands(blast_output)
     M1Raw = BPEssentials(blast_output, blast_arm, QxyD, BANDxy, quality_data, FASTAEnds)
-    return M1Raw #, seq    
+    return M1Raw #, seq
 """End Essential Executes for M1 Matrix"""
 
 
@@ -969,7 +969,7 @@ def WebExecute():
     print("Content-Type: text/html;charset=utf-8")
     print() # needed to separate heading
     HTML_Header()
-    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = [] 
+    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = []
     fasta_input_file = read_fasta_input_from_web(cgi.FieldStorage())
     InputSeqs, InputError = GetInputFASTA(fasta_input_file)
     if InputError != []:
@@ -997,10 +997,10 @@ def WebExecute():
                 print('</br>.').join(InputError)
             elif blast_output_error != []:
                 print('</br>').join(blast_output_error)
-            
+
             elif range(len(M1Raw)) == []:
                 print("<br> No Breakpoint Detected </br>")
-            
+
             elif range(len(M1Raw)) == [0,1]:
                 print("<br> Single Breakpoint Detected </br>")
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
@@ -1010,7 +1010,7 @@ def WebExecute():
                     Tables_Small(M1Raw, i)
                     print("BLA(S)T Output:  %s ") % RP[i]
                     print("<br></br>")
-            
+
             else:
                 print("<br>Mulitple Breakpoints Detected</br>")
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
@@ -1034,11 +1034,11 @@ def WebExecute():
                     nomenclature = Naming(D, DnC)
                     print(nomenclature)
     HTML_Footer()
-    Errors = InputError, blast_output_error, nomenclature_error, loop_error 
+    Errors = InputError, blast_output_error, nomenclature_error, loop_error
     return Errors, M1Final, RP, nomenclature, start
 
-def PythonExecuteFull(): 
-    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = [] 
+def PythonExecuteFull():
+    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = []
     fasta_input_file = raw_input("Enter FASTA.xml file: ")
     start = time.clock()
     read_fasta_input(fasta_input_file)
@@ -1046,7 +1046,7 @@ def PythonExecuteFull():
     if InputError != []:
         print('Input Errors detected:')
         print('/n'.join(InputError))
-    else:    
+    else:
         print("Executing BLAST. Please wait.")
         blast_records = ParseBlastXml(fasta_input_file)
         blast_output, QxyD, quality_data, FASTAEnds, blast_output_error = BlastOutput(blast_records)
@@ -1098,17 +1098,17 @@ def PythonExecuteFull():
                 else:
                     nomenclature = Naming(D, DnC)
                     print(nomenclature)
-    Errors = InputError, blast_output_error, nomenclature_error, loop_error 
+    Errors = InputError, blast_output_error, nomenclature_error, loop_error
     return Errors, M1Final, RP, nomenclature, start
 
-def PythonExecuteReturn(): 
-    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = [] 
+def PythonExecuteReturn():
+    InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = []
     fasta_input_file = raw_input("Enter FASTA.xml file: ")
     read_fasta_input(fasta_input_file)
     InputSeqs, InputError = GetInputFASTA(fasta_input_file)
     if InputError != []:
         ','.join(InputError)
-    else:    
+    else:
         blast_records = ParseBlastXml(fasta_input_file)
         blast_output, QxyD, quality_data, FASTAEnds, blast_output_error = BlastOutput(blast_records)
         if blast_output_error != []:
@@ -1138,7 +1138,7 @@ def PythonExecuteReturn():
                     nomenclature = Naming(D, DnC)
                 else:
                     nomenclature = Naming(D, DnC)
-    Errors = InputError, blast_output_error, nomenclature_error, loop_error 
+    Errors = InputError, blast_output_error, nomenclature_error, loop_error
     return Errors, M1Final, RP, nomenclature
 """Code Exectution"""
 

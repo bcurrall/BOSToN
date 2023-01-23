@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.1.1
+#!/usr/local/bin/python2.7.3
 
 
 from Bio.Blast.Applications import NcbiblastnCommandline
@@ -128,12 +128,12 @@ def GetAppDir():
 def read_fasta_input(fasta_input_file):
     arg_len = len(fasta_input_file)
     if arg_len < 2:
-        print('Usage: python(2.7+)'), sys.argv[0], '[path_to_fasta_file]'
+        print 'Usage: python(2.7+)', sys.argv[0], '[path_to_fasta_file]'
         raw_input("press <enter> to end")
         sys.exit()
     path_to_fasta_file = fasta_input_file
     if not os.path.isfile(path_to_fasta_file):
-        print('Fasta input file "', path_to_fasta_file), '" does not exist.'
+        print 'Fasta input file "', path_to_fasta_file, '" does not exist.'
         raw_input("press <enter> to end")
         sys.exit()
     return path_to_fasta_file
@@ -820,9 +820,9 @@ def Naming(D, DnC):
 """Finishing"""
 def Tables_Small(M1Raw, i):
 # <th>Rearrangement </th>
-    print("All data within tables are acquired from BLAST")
+    print "All data within tables are acquired from BLAST"
     #<th>Rearrangement </th>
-    print( """
+    print """
         <table border="1">
         <tr>
         <th>Query Start</th>
@@ -838,70 +838,70 @@ def Tables_Small(M1Raw, i):
         <th>Max Score</th>
         <th>e-value</th>
         </tr>
-    """)
+    """
     ## ALL THE x stuff here
-    print("<tr>")
+    print "<tr>"
     #print "<td>%s</td>" % str(i)  # input/seq #
-    print("<td>%s</td>") % M1Raw[i*2][9] # query start
-    print("<td>%s</td>") % M1Raw[i*2][10] # query end
-    print("<td>%s</td>") % str(abs(M1Raw[i*2+1][9] - M1Raw[i*2+1][10]) + 1) # query length
+    print "<td>%s</td>" % M1Raw[i*2][9] # query start
+    print "<td>%s</td>" % M1Raw[i*2][10] # query end
+    print "<td>%s</td>" % str(abs(M1Raw[i*2+1][9] - M1Raw[i*2+1][10]) + 1) # query length
     if M1Raw[i*2][8] == 1:
-        print("<td> (+) </td>")  # query (+) strand
+        print "<td> (+) </td>"  # query (+) strand
     elif M1Raw[i*2][8] == -1:
-        print("<td> (-) </td>")  # query (-) strand
-    print("<td>%s</td>") % ''.join([str(M1Raw[i*2][16]), '%']) # identity
-    print("<td>%s</td>") % M1Raw[i*2][1] # sbjct chromosome
-    print("<td>%s</td>") % M1Raw[i*2][13] # sbjct band
+        print "<td> (-) </td>"  # query (-) strand
+    print "<td>%s</td>" % ''.join([str(M1Raw[i*2][16]), '%']) # identity
+    print "<td>%s</td>" % M1Raw[i*2][1] # sbjct chromosome
+    print "<td>%s</td>" % M1Raw[i*2][13] # sbjct band
     if M1Raw[i*2][6] == 1:
-        print("<td> (+) </td>")  # sbjct direction
+        print "<td> (+) </td>"  # sbjct direction
     elif M1Raw[i*2][6] == -1:
-        print("<td> (-) </td>")  # sbjct direction
-    print("<td>%s</td>") % M1Raw[i*2][4] # sbjct start
-    print("<td>%s</td>") % M1Raw[i*2][5] # sbjct end
-    print("<td>%s</td>") % M1Raw[i*2][15] # blast Score
-    print("<td>%s</td>") % M1Raw[i*2][14] # blast e-value
-    print("</tr>")
+        print "<td> (-) </td>"  # sbjct direction
+    print "<td>%s</td>" % M1Raw[i*2][4] # sbjct start
+    print "<td>%s</td>" % M1Raw[i*2][5] # sbjct end
+    print "<td>%s</td>" % M1Raw[i*2][15] # blast Score
+    print "<td>%s</td>" % M1Raw[i*2][14] # blast e-value
+    print "</tr>"
 
     ## ALL THE y stuff here
-    print("<tr>")
+    print "<tr>"
     #print "<td>%s</td>" % str(i)  # input/seq #
-    print("<td>%s</td>") % M1Raw[i*2+1][9] # query start
-    print("<td>%s</td>") % M1Raw[i*2+1][10] # query end
-    print("<td>%s</td>") % str(abs(M1Raw[i*2+1][9] - M1Raw[i*2+1][10]) + 1) # query length
+    print "<td>%s</td>" % M1Raw[i*2+1][9] # query start
+    print "<td>%s</td>" % M1Raw[i*2+1][10] # query end
+    print "<td>%s</td>" % str(abs(M1Raw[i*2+1][9] - M1Raw[i*2+1][10]) + 1) # query length
     if M1Raw[i*2+1][8] == 1:
-        print("<td> (+) </td>")  # query (+) strand
+        print "<td> (+) </td>"  # query (+) strand
     elif M1Raw[i*2+1][8] == -1:
-        print("<td> (-) </td>")  # query (-) strand
-    print("<td>%s</td>") % ''.join([str(M1Raw[i*2+1][16]), '%']) # identity
-    print("<td>%s</td>") % M1Raw[i*2+1][1] # sbjct chromosome
-    print("<td>%s</td>") % M1Raw[i*2+1][13] # sbjct band
+        print "<td> (-) </td>"  # query (-) strand
+    print "<td>%s</td>" % ''.join([str(M1Raw[i*2+1][16]), '%']) # identity
+    print "<td>%s</td>" % M1Raw[i*2+1][1] # sbjct chromosome
+    print "<td>%s</td>" % M1Raw[i*2+1][13] # sbjct band
     if M1Raw[i*2+1][6] == 1:
-        print("<td> (+) </td>")  # sbjct direction
+        print "<td> (+) </td>"  # sbjct direction
     elif M1Raw[i*2+1][6] == -1:
-        print("<td> (-) </td>")  # sbjct direction
-    print("<td>%s</td>") % M1Raw[i*2+1][4] # sbjct start
-    print("<td>%s</td>") % M1Raw[i*2+1][5] # sbjct end
-    print("<td>%s</td>") % M1Raw[i*2+1][15] # blast Score
-    print("<td>%s</td>") % M1Raw[i*2+1][14] # blast e-value
-    print("</tr>")
-    print("</table>")
+        print "<td> (-) </td>"  # sbjct direction
+    print "<td>%s</td>" % M1Raw[i*2+1][4] # sbjct start
+    print "<td>%s</td>" % M1Raw[i*2+1][5] # sbjct end
+    print "<td>%s</td>" % M1Raw[i*2+1][15] # blast Score
+    print "<td>%s</td>" % M1Raw[i*2+1][14] # blast e-value
+    print "</tr>"
+    print "</table>"
 
 def HTML_Header():
-    print("""
+    print """
     <html>
     <head>
       <title>BOSToN Output</title>
     </head>
     <body>
     <big><span style="font-weight: bold;">BOSToN Output:</span></big><br>
-    """)
+    """
 
 def HTML_Footer():
-    print("""
+    print """
     </p>
     </body>
     </html>
-    """)
+    """
 def SingleBreakPointTables(M1Raw,i):
     BPTable = []
     QStart = QEnd = QLength = QStrand = Identity = SChr = SBand = SStrand = SStart = SEnd = Score = Evalue = []
@@ -966,73 +966,73 @@ def BPExecute(fasta_file):
 def WebExecute():
     cgitb.enable() # enable debugging
     start = time.clock()
-    print("Content-Type: text/html;charset=utf-8")
-    print() # needed to separate heading
+    print "Content-Type: text/html;charset=utf-8"
+    print # needed to separate heading
     HTML_Header()
     InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = []
     fasta_input_file = read_fasta_input_from_web(cgi.FieldStorage())
     InputSeqs, InputError = GetInputFASTA(fasta_input_file)
     if InputError != []:
-        print('<br><b>Input Errors detected: </b></br>')
-        print('</br>.').join(InputError)
+        print '<br><b>Input Errors detected: </b></br>'
+        print '</br>.'.join(InputError)
     else:
         blast_records = ParseBlastXml(fasta_input_file)
         blast_output, QxyD, quality_data, FASTAEnds, blast_output_error = BlastOutput(blast_records)
         if blast_output_error != []:
-            print('<br><b>Ouput Errors detected: </b></br>')
-            print('</br>.').join(blast_output_error)
+            print '<br><b>Ouput Errors detected: </b></br>'
+            print '</br>.'.join(blast_output_error)
         else:
             blast_arm = GetArm(blast_output)
             BANDxy = GetBands(blast_output)
             M1Raw = BPEssentials(blast_output, blast_arm, QxyD, BANDxy, quality_data, FASTAEnds)
-            print("""<p style="font-family: Courier New,Courier,monospace;">""")
+            print """<p style="font-family: Courier New,Courier,monospace;">"""
             with open(fasta_input_file, 'r') as fasta_input:
                 f_input = fasta_input.read()
                 f_input = f_input.replace("\r\n", "<br />")
-                print(f_input)
-            print("</p>")
-            print("<p>")
+                print f_input
+            print "</p>"
+            print "<p>"
             if InputError != []:
-                print('<br>Input Errors detected: </br>')
-                print('</br>.').join(InputError)
+                print '<br>Input Errors detected: </br>'
+                print '</br>.'.join(InputError)
             elif blast_output_error != []:
-                print('</br>').join(blast_output_error)
+                print '</br>'.join(blast_output_error)
 
             elif range(len(M1Raw)) == []:
-                print("<br> No Breakpoint Detected </br>")
+                print "<br> No Breakpoint Detected </br>"
 
             elif range(len(M1Raw)) == [0,1]:
-                print("<br> Single Breakpoint Detected </br>")
+                print "<br> Single Breakpoint Detected </br>"
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
                 RP = Rearrangement_Pieces(M1Raw, DnO)
                 for i in range(len(M1Raw)/2):
-                    print("""<br><span style="font-weight: bold;">Rearrangement_%s </span></br>""") % NumAlphaConvert(i)
+                    print """<br><span style="font-weight: bold;">Rearrangement_%s </span></br>""" % NumAlphaConvert(i)
                     Tables_Small(M1Raw, i)
-                    print("BLA(S)T Output:  %s ") % RP[i]
-                    print("<br></br>")
+                    print "BLA(S)T Output:  %s " % RP[i]
+                    print "<br></br>"
 
             else:
-                print("<br>Mulitple Breakpoints Detected</br>")
+                print "<br>Mulitple Breakpoints Detected</br>"
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
                 RP = Rearrangement_Pieces(M1Raw, DnO)
                 for i in range(len(M1Raw)/2):
-                    print("""<br><span style="font-weight: bold;">Rearrangement_%s </span></br>""") % NumAlphaConvert(i)
+                    print """<br><span style="font-weight: bold;">Rearrangement_%s </span></br>""" % NumAlphaConvert(i)
                     Tables_Small(M1Raw, i)
-                    print("BLA(S)T Output:  %s ") % RP[i]
-                    print("<br></br>")
+                    print "BLA(S)T Output:  %s " % RP[i]
+                    print "<br></br>"
                 DnC = D_Picker(M1Raw)
                 D, nomenclature_error, loop_error = Derivative_Definition(M1Raw, M1Final, DnC)
                 if nomenclature_error != [] and loop_error == []:
-                    print('</br>').join(nomenclature_error)
+                    print '</br>'.join(nomenclature_error)
                 elif loop_error != []:
-                    print('</br>').join(nomenclature_error)
-                    print('</br>').join(loop_error)
-                    print("<br> Nomenclature up to loop: </br>")
+                    print '</br>'.join(nomenclature_error)
+                    print '</br>'.join(loop_error)
+                    print "<br> Nomenclature up to loop: </br>"
                     nomenclature = Naming(D, DnC)
-                    print(nomenclature)
+                    print nomenclature
                 else:
                     nomenclature = Naming(D, DnC)
-                    print(nomenclature)
+                    print nomenclature
     HTML_Footer()
     Errors = InputError, blast_output_error, nomenclature_error, loop_error
     return Errors, M1Final, RP, nomenclature, start
@@ -1044,60 +1044,60 @@ def PythonExecuteFull():
     read_fasta_input(fasta_input_file)
     InputSeqs, InputError = GetInputFASTA(fasta_input_file)
     if InputError != []:
-        print('Input Errors detected:')
-        print('/n'.join(InputError))
+        print 'Input Errors detected:'
+        print '/n'.join(InputError)
     else:
-        print("Executing BLAST. Please wait.")
+        print "Executing BLAST. Please wait."
         blast_records = ParseBlastXml(fasta_input_file)
         blast_output, QxyD, quality_data, FASTAEnds, blast_output_error = BlastOutput(blast_records)
         if blast_output_error != []:
-            print('Ouput Errors detected:')
-            print('/n.').join(blast_output_error)
+            print 'Ouput Errors detected:'
+            print '/n.'.join(blast_output_error)
         else:
             blast_arm = GetArm(blast_output)
             BANDxy = GetBands(blast_output)
             M1Raw = BPEssentials(blast_output, blast_arm, QxyD, BANDxy, quality_data, FASTAEnds)
             if range(len(M1Raw)) == []:
-                print("No Breakpoint Detected")
+                print "No Breakpoint Detected"
                 for i in range(len(InputSeqs)):
-                    print(nputSeqs[i])
+                    print InputSeqs[i]
             elif range(len(M1Raw)) == [0,1]:
-                print("Single Breakpoint Detected")
+                print "Single Breakpoint Detected"
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
                 RP = Rearrangement_Pieces(M1Raw, DnO)
                 for i in range(len(M1Raw)/2):
-                    print(">Rearrangement_", NumAlphaConvert(i))
+                    print ">Rearrangement_", NumAlphaConvert(i)
                     BPTableHeader = ["Q_Start","Q_End","Q_Length","Q_Strand","Identity","S_Chr","S_Band","S_Strand","S_Start","S_End","Score", "E-value"]
-                    print(', ').join(BPTableHeader)
+                    print ', '.join(BPTableHeader)
                     BPTable = SingleBreakPointTables(M1Raw, i)
                     for j in range(len(BPTable)):
-                        print(', ').join(BPTable[j])
-                    print(P[i])
+                        print ', '.join(BPTable[j])
+                    print RP[i]
             else:
-                print("Mulitple Breakpoints Detected")
+                print "Mulitple Breakpoints Detected"
                 DnC = D_Picker(M1Raw)
                 DnO, M1Final = O_Picker(M1Raw,InputSeqs)
                 RP = Rearrangement_Pieces(M1Raw, DnO)
                 for i in range(len(M1Raw)/2):
-                    print(">Rearrangement_", NumAlphaConvert(i))
+                    print ">Rearrangement_", NumAlphaConvert(i)
                     BPTableHeader = ["Q_Start","Q_End","Q_Length","Q_Strand","Identity","S_Chr","S_Band","S_Strand","S_Start","S_End","Score", "E-value"]
-                    print(', ').join(BPTableHeader)
+                    print ', '.join(BPTableHeader)
                     BPTable = SingleBreakPointTables(M1Raw, i)
                     for j in range(len(BPTable)):
-                        print(', ').join(BPTable[j])
-                    print(P[i])
+                        print ', '.join(BPTable[j])
+                    print RP[i]
                 D, nomenclature_error, loop_error = Derivative_Definition(M1Raw, M1Final, DnC)
                 if nomenclature_error != [] and loop_error == []:
-                    print('/n').join(nomenclature_error)
+                    print '/n'.join(nomenclature_error)
                 elif loop_error != []:
-                    print('/n').join(nomenclature_error)
-                    print('/n').join(loop_error)
-                    print("Nomenclature at loop:")
+                    print '/n'.join(nomenclature_error)
+                    print '/n'.join(loop_error)
+                    print "Nomenclature at loop:"
                     nomenclature = Naming(D, DnC)
-                    print(nomenclature)
+                    print nomenclature
                 else:
                     nomenclature = Naming(D, DnC)
-                    print(nomenclature)
+                    print nomenclature
     Errors = InputError, blast_output_error, nomenclature_error, loop_error
     return Errors, M1Final, RP, nomenclature, start
 
@@ -1130,11 +1130,11 @@ def PythonExecuteReturn():
                 DnC = D_Picker(M1Raw)
                 D, nomenclature_error, loop_error = Derivative_Definition(M1Raw, M1Final, DnC)
                 if nomenclature_error != [] and loop_error == []:
-                    print('/n').join(nomenclature_error)
+                    print '/n'.join(nomenclature_error)
                 elif loop_error != []:
-                    print('/n').join(nomenclature_error)
-                    print('/n').join(loop_error)
-                    print("Nomenclature up to loop:")
+                    print '/n'.join(nomenclature_error)
+                    print '/n'.join(loop_error)
+                    print "Nomenclature up to loop:"
                     nomenclature = Naming(D, DnC)
                 else:
                     nomenclature = Naming(D, DnC)
@@ -1147,6 +1147,6 @@ Errors, M1Final, RP, nomenclature, start = WebExecute()
 #Errors, M1Final, RP, nomenclature = PythonExecuteReturn()
 
 elapsed = (time.clock() - start)
-print("Run time = "), elapsed
-print(sys.version)
+print "Run time = ", elapsed
+#print(sys.version)
 #raw_input("press <enter> to end")
