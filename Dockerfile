@@ -1,22 +1,20 @@
 ## source https://davescripts.com/docker-container-with-centos-7-apache-mod-wsgi-python-3
 
-FROM centos:7
+FROM ubuntu/apache2
+#RUN apt-get update && \
+#  apt-get install -y \
+#  apache2 \
+#  apache2-utils
 
-# Install Apache
-RUN yum -y update
-RUN yum -y install httpd httpd-tools
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip
 
-# Install Python 3
-RUN yum -y install python3
+#EXPOSE 8080:80
 
-# Install mod_wsgi
-RUN yum -y install mod_wsgi
+COPY www /var/www/html
 
-RUN pip3 install biopython
-
-COPY www /var/www
-
-EXPOSE 80
+RUN chmod +x /var/www/html/cgi-bin/BOSToN/BOSToNWeb.py
 
 # Start Apache
-CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+#CMD ["apache2ctl", "-D","FOREGROUND"]
