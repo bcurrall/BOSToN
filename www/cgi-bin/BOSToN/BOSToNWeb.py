@@ -13,7 +13,7 @@ import os.path
 import tempfile
 import cgi
 import cgitb
-import time
+# import time
 import copy
 import struct
 
@@ -965,7 +965,7 @@ def BPExecute(fasta_file):
 """Code Exectution"""
 def WebExecute():
     cgitb.enable() # enable debugging
-    start = time.clock()
+    # start = time.clock()
     print("Content-Type: text/html;charset=utf-8")
     print() # needed to separate heading
     HTML_Header()
@@ -1040,7 +1040,7 @@ def WebExecute():
 def PythonExecuteFull():
     InputError = blast_output_error = M1Final = RP = nomenclature_error = nomenclature = []
     fasta_input_file = raw_input("Enter FASTA.xml file: ")
-    start = time.clock()
+    # start = time.clock()
     read_fasta_input(fasta_input_file)
     InputSeqs, InputError = GetInputFASTA(fasta_input_file)
     if InputError != []:
@@ -1146,7 +1146,7 @@ Errors, M1Final, RP, nomenclature, start = WebExecute()
 #Errors, M1Final, RP, nomenclature, start = PythonExecuteFull()
 #Errors, M1Final, RP, nomenclature = PythonExecuteReturn()
 
-elapsed = (time.clock() - start)
-print("Run time = "), elapsed
+# elapsed = (time.clock() - start)
+# print("Run time = "), elapsed
 print(sys.version)
 #raw_input("press <enter> to end")
